@@ -1,7 +1,7 @@
 import express from "express";
 
 const app = express();
-const port = 3000;
+const port = 8080;
 
 app.get("/", (_, res) => {
   res.send("Hello, World!");
@@ -12,6 +12,34 @@ app.get("/about", (_, res) => {
 
 app.get("/contact", (_, res) => {
   res.send("Contact page");
+});
+
+const users = [
+  { id: 1, name: "John Doe" },
+  { id: 2, name: "Jane Smith" },
+  { id: 3, name: "Michael Johnson" },
+  { id: 4, name: "Emily Davis" },
+  { id: 5, name: "David Wilson" },
+  { id: 6, name: "Sarah Anderson" },
+  { id: 7, name: "Daniel Martinez" },
+  { id: 8, name: "Olivia Taylor" },
+  { id: 9, name: "Matthew Thomas" },
+  { id: 10, name: "Sophia Brown" },
+];
+
+app.get("/users", (_, res) => {
+  res.json(users);
+});
+
+app.get("/users/:id", (req, res) => {
+  const userId = parseInt(req.params.id);
+  const user = users.find((user) => user.id === userId);
+
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
 });
 
 app.listen(port, () => {
