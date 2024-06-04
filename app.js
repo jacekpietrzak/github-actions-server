@@ -6,13 +6,6 @@ const port = 8080;
 app.get("/", (_, res) => {
   res.send("Hello, World!");
 });
-app.get("/about", (_, res) => {
-  res.send("About page");
-});
-
-app.get("/contact", (_, res) => {
-  res.send("Contact page");
-});
 
 const users = [
   { id: 1, name: "John Doe" },
@@ -27,11 +20,11 @@ const users = [
   { id: 10, name: "Sophia Brown" },
 ];
 
-app.get("/users", (_, res) => {
+app.get("/api/users", (_, res) => {
   res.json(users);
 });
 
-app.get("/users/:id", (req, res) => {
+app.get("/api/users/:id", (req, res) => {
   const userId = parseInt(req.params.id);
   const user = users.find((user) => user.id === userId);
 
